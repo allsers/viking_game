@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=4 uid="uid://cgjft4tf1jupr"]
+
+[ext_resource type="PackedScene" uid="uid://b5753y5ebhp83" path="res://player.tscn" id="1_4by7p"]
+[ext_resource type="Script" path="res://world.gd" id="1_gjeuu"]
+[ext_resource type="Script" path="res://waves.gd" id="3_6p2ya"]
+[ext_resource type="Texture2D" uid="uid://vofb0ek1kiqu" path="res://assets/textures/Ship.png" id="3_86edd"]
+[ext_resource type="Texture2D" uid="uid://cxirkktkh7tbu" path="res://assets/textures/Mast.png" id="4_itvs0"]
+[ext_resource type="Script" path="res://waves_2.gd" id="4_o5vph"]
+[ext_resource type="Texture2D" uid="uid://bc5loukb3f1pt" path="res://assets/textures/Wave.png" id="5_dkfjn"]
+[ext_resource type="Script" path="res://color_rect.gd" id="8_5bicx"]
+[ext_resource type="Texture2D" uid="uid://g8xihy7evfi6" path="res://assets/textures/Sky.png" id="9_nb6er"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qao41"]
+texture = ExtResource("5_dkfjn")
+use_texture_padding = false
+0:1/0 = 0
+1:1/0 = 0
+1:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_nyo10"]
+sources/1 = SubResource("TileSetAtlasSource_qao41")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87y0k"]
+size = Vector2(4638, 514)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_gjeuu")
+
+[node name="Waves" type="TileMapLayer" parent="."]
+z_index = 2
+position = Vector2(-3, -28)
+scale = Vector2(11.54, 11.551)
+tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAFAAEAAQABAAEAAAAEAAEAAQAAAAEAAAADAAEAAQABAAEAAAAHAAEAAQABAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQABAAEAAAAKAAEAAQAAAAEAAAALAAEAAQABAAEAAAAMAAEAAQAAAAEAAAAOAAEAAQAAAAEAAAANAAEAAQABAAEAAAAPAAEAAQABAAEAAAAQAAEAAQAAAAEAAAARAAEAAQABAAEAAAASAAEAAQAAAAEAAAATAAEAAQABAAEAAAAUAAEAAQAAAAEAAAAVAAEAAQABAAEAAAAWAAEAAQAAAAEAAAAXAAEAAQABAAEAAAAYAAEAAQAAAAEAAAD7/wEAAQABAAEAAAD8/wEAAQAAAAEAAAD9/wEAAQABAAEAAAD+/wEAAQAAAAEAAAD//wEAAQABAAEAAAAAAAEAAQAAAAEAAAABAAEAAQABAAEAAAAZAAEAAQABAAEAAAAaAAEAAQAAAAEAAAAbAAEAAQABAAEAAAAcAAEAAQAAAAEAAAD6/wEAAQAAAAEAAAD4/wEAAQAAAAEAAAD5/wEAAQABAAEAAAD2/wEAAQAAAAEAAAD3/wEAAQABAAEAAAD0/wEAAQAAAAEAAAD1/wEAAQABAAEAAADy/wEAAQAAAAEAAADz/wEAAQABAAEAAADw/wEAAQAAAAEAAADx/wEAAQABAAEAAADu/wEAAQAAAAEAAADv/wEAAQABAAEAAADs/wEAAQAAAAEAAADt/wEAAQABAAEAAAAeAAEAAQAAAAEAAAAfAAEAAQABAAEAAAAgAAEAAQAAAAEAAAAhAAEAAQABAAEAAAAiAAEAAQAAAAEAAAAjAAEAAQABAAEAAAAdAAEAAQABAAEAAAAkAAEAAQAAAAEAAAAlAAEAAQABAAEAAAAmAAEAAQAAAAEAAAAnAAEAAQABAAEAAAAoAAEAAQAAAAEAAAApAAEAAQABAAEAAAA=")
+tile_set = SubResource("TileSet_nyo10")
+script = ExtResource("3_6p2ya")
+
+[node name="Waves2" type="TileMapLayer" parent="."]
+z_index = 2
+position = Vector2(184, 101)
+scale = Vector2(11.54, 11.551)
+tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAFAAEAAQABAAEAAAAEAAEAAQAAAAEAAAADAAEAAQABAAEAAAAHAAEAAQABAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQABAAEAAAAKAAEAAQAAAAEAAAALAAEAAQABAAEAAAAMAAEAAQAAAAEAAAAOAAEAAQAAAAEAAAANAAEAAQABAAEAAAAPAAEAAQABAAEAAAAQAAEAAQAAAAEAAAARAAEAAQABAAEAAAASAAEAAQAAAAEAAAATAAEAAQABAAEAAAAUAAEAAQAAAAEAAAAVAAEAAQABAAEAAAAWAAEAAQAAAAEAAAAXAAEAAQABAAEAAAAYAAEAAQAAAAEAAAD7/wEAAQABAAEAAAD8/wEAAQAAAAEAAAD9/wEAAQABAAEAAAD+/wEAAQAAAAEAAAD//wEAAQABAAEAAAAAAAEAAQAAAAEAAAABAAEAAQABAAEAAAAZAAEAAQABAAEAAAAaAAEAAQAAAAEAAAAbAAEAAQABAAEAAAAcAAEAAQAAAAEAAAD6/wEAAQAAAAEAAAD4/wEAAQAAAAEAAAD5/wEAAQABAAEAAAD2/wEAAQAAAAEAAAD3/wEAAQABAAEAAAD0/wEAAQAAAAEAAAD1/wEAAQABAAEAAADy/wEAAQAAAAEAAADz/wEAAQABAAEAAADw/wEAAQAAAAEAAADx/wEAAQABAAEAAADu/wEAAQAAAAEAAADv/wEAAQABAAEAAADs/wEAAQAAAAEAAADt/wEAAQABAAEAAAAeAAEAAQAAAAEAAAAfAAEAAQABAAEAAAAgAAEAAQAAAAEAAAAhAAEAAQABAAEAAAAiAAEAAQAAAAEAAAAjAAEAAQABAAEAAAAdAAEAAQABAAEAAAAkAAEAAQAAAAEAAAAlAAEAAQABAAEAAAAmAAEAAQAAAAEAAAAnAAEAAQABAAEAAAAoAAEAAQAAAAEAAAApAAEAAQABAAEAAAA=")
+tile_set = SubResource("TileSet_nyo10")
+script = ExtResource("4_o5vph")
+
+[node name="Player" parent="." instance=ExtResource("1_4by7p")]
+position = Vector2(559, -256)
+jump_force = 1000
+
+[node name="Ship" type="StaticBody2D" parent="."]
+position = Vector2(512, -47)
+
+[node name="MastTexture" type="TextureRect" parent="Ship"]
+z_index = -1
+offset_left = -1321.0
+offset_top = -2651.0
+offset_right = -809.0
+offset_bottom = -2395.0
+scale = Vector2(11.54, 11.54)
+texture = ExtResource("4_itvs0")
+
+[node name="ShipTexture" type="TextureRect" parent="Ship"]
+z_index = 1
+offset_left = -1417.0
+offset_top = -2633.0
+offset_right = -1161.0
+offset_bottom = -2377.0
+scale = Vector2(11.5398, 11.5398)
+texture = ExtResource("3_86edd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+position = Vector2(1544, 45)
+shape = SubResource("RectangleShape2D_87y0k")
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Ship"]
+position = Vector2(-1020, -211)
+scale = Vector2(5.28, 3.12)
+polygon = PackedVector2Array(14.7727, -20.8333, 46.2121, 0.96154, 45.4545, 157.051, 8.52273, 119.872, -19.697, 67.9487, -39.0152, 4.48718, -48.8636, -41.0256, -46.4015, -68.9103, -52.8409, -71.4744, -63.2576, -71.4744, -71.7803, -80.1282, -74.053, -96.7949, -74.2424, -114.744, -73.4848, -125.321, -69.697, -130.769, -58.9015, -146.474, -51.5152, -145.833, -36.553, -141.346, -33.5227, -174.038, 17.0455, -249.359)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Ship"]
+position = Vector2(4101, -212)
+scale = Vector2(-5.28, 3.12)
+polygon = PackedVector2Array(20.644, -7.05128, 46.2121, 0.96154, 45.4545, 157.051, 8.52273, 119.872, -19.697, 67.9487, -39.0152, 4.48718, -48.8636, -41.0256, -46.4015, -68.9103, -52.8409, -71.4744, -63.2576, -71.4744, -71.7803, -80.1282, -74.053, -96.7949, -74.2424, -114.744, -73.4848, -125.321, -69.697, -130.769, -58.9015, -146.474, -51.5152, -145.833, -36.553, -141.346, -33.5227, -174.038, 10.6061, -182.051)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3448.0
+offset_top = 466.0
+offset_right = -3408.0
+offset_bottom = 506.0
+scale = Vector2(286.077, 3.04817)
+color = Color(0.25098, 0.317647, 0.72549, 1)
+script = ExtResource("8_5bicx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -2992.0
+offset_top = -3049.0
+offset_right = -2480.0
+offset_bottom = -2537.0
+scale = Vector2(19.9191, 7.08914)
+texture = ExtResource("9_nb6er")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://umo5qltyexfm"]
+
+[ext_resource type="Texture2D" uid="uid://j7yfhb71mgce" path="res://assets/textures/enemy.webp" id="1_7en1y"]
+[ext_resource type="Script" path="res://enemy.gd" id="2_uvwa3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p4bgr"]
+radius = 85.0
+height = 170.0
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(3, -50)
+script = ExtResource("2_uvwa3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 1.19209e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_7en1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 4)
+shape = SubResource("CapsuleShape2D_p4bgr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
