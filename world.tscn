@@ -1,14 +1,60 @@
-[gd_scene load_steps=13 format=4 uid="uid://cgjft4tf1jupr"]
+[gd_scene load_steps=22 format=4 uid="uid://cgjft4tf1jupr"]
 
 [ext_resource type="PackedScene" uid="uid://b5753y5ebhp83" path="res://player.tscn" id="1_4by7p"]
 [ext_resource type="Script" path="res://world.gd" id="1_gjeuu"]
+[ext_resource type="Texture2D" uid="uid://bgb5877wt3k4n" path="res://assets/textures/Cloud1.png" id="2_us4h8"]
 [ext_resource type="Script" path="res://waves.gd" id="3_6p2ya"]
 [ext_resource type="Texture2D" uid="uid://vofb0ek1kiqu" path="res://assets/textures/Ship.png" id="3_86edd"]
+[ext_resource type="Texture2D" uid="uid://c30ohvil1kmxl" path="res://assets/textures/Cloud2.png" id="3_wyigl"]
+[ext_resource type="Texture2D" uid="uid://cqal5dg570o8f" path="res://assets/textures/Cloud3.png" id="4_bs6va"]
 [ext_resource type="Texture2D" uid="uid://cxirkktkh7tbu" path="res://assets/textures/Mast.png" id="4_itvs0"]
 [ext_resource type="Script" path="res://waves_2.gd" id="4_o5vph"]
+[ext_resource type="Script" path="res://clouds.gd" id="5_6vsq3"]
 [ext_resource type="Texture2D" uid="uid://bc5loukb3f1pt" path="res://assets/textures/Wave.png" id="5_dkfjn"]
 [ext_resource type="Script" path="res://color_rect.gd" id="8_5bicx"]
 [ext_resource type="Texture2D" uid="uid://g8xihy7evfi6" path="res://assets/textures/Sky.png" id="9_nb6er"]
+[ext_resource type="AudioStream" uid="uid://lojgsrfxl0k7" path="res://assets/textures/health_bar/Combat (1).wav" id="10_dfdx3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mf8fs"]
+texture = ExtResource("2_us4h8")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jienl"]
+texture = ExtResource("3_wyigl")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oa5rm"]
+texture = ExtResource("4_bs6va")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wipaq"]
+sources/0 = SubResource("TileSetAtlasSource_mf8fs")
+sources/1 = SubResource("TileSetAtlasSource_jienl")
+sources/2 = SubResource("TileSetAtlasSource_oa5rm")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qao41"]
 texture = ExtResource("5_dkfjn")
@@ -25,7 +71,16 @@ sources/1 = SubResource("TileSetAtlasSource_qao41")
 size = Vector2(4638, 514)
 
 [node name="World" type="Node2D"]
+position = Vector2(249, -434)
 script = ExtResource("1_gjeuu")
+spawn_height_offset = 3000
+
+[node name="Clouds" type="TileMapLayer" parent="."]
+position = Vector2(-837, -1715)
+scale = Vector2(18.56, 18.56)
+tile_map_data = PackedByteArray("AAAGAP7/AQAAAAEAAAAHAP3/AQABAAAAAAAHAP7/AQABAAEAAAAIAP3/AQACAAAAAAAIAP7/AQACAAEAAAAJAP3/AQADAAAAAAAJAP7/AQADAAEAAAAOAP7/AgAAAAAAAAAOAP//AgAAAAEAAAAPAP7/AgABAAAAAAAPAP//AgABAAEAAAAQAP7/AgACAAAAAAAQAP//AgACAAEAAAARAP7/AgADAAAAAAARAP//AgADAAEAAAASAP7/AgAEAAAAAAASAP//AgAEAAEAAAAXAAIAAQAAAAEAAAAYAAEAAQABAAAAAAAYAAIAAQABAAEAAAAZAAEAAQACAAAAAAAZAAIAAQACAAEAAAAaAAEAAQADAAAAAAAaAAIAAQADAAEAAAD///7/AgAAAAAAAAD/////AgAAAAEAAAAAAP7/AgABAAAAAAAAAP//AgABAAEAAAABAP7/AgACAAAAAAABAP//AgACAAEAAAACAP7/AgADAAAAAAACAP//AgADAAEAAAADAP7/AgAEAAAAAAADAP//AgAEAAEAAAD5////AAAAAAAAAAD5/wAAAAAAAAEAAAD6////AAABAAAAAAD6/wAAAAABAAEAAAD7////AAACAAAAAAD7/wAAAAACAAEAAAD8////AAADAAAAAAD8/wAAAAADAAEAAAD9////AAAEAAAAAAD9/wAAAAAEAAEAAAA=")
+tile_set = SubResource("TileSet_wipaq")
+script = ExtResource("5_6vsq3")
 
 [node name="Waves" type="TileMapLayer" parent="."]
 z_index = 2
@@ -45,10 +100,20 @@ script = ExtResource("4_o5vph")
 
 [node name="Player" parent="." instance=ExtResource("1_4by7p")]
 position = Vector2(559, -256)
-jump_force = 1000
 
 [node name="Ship" type="StaticBody2D" parent="."]
-position = Vector2(512, -47)
+position = Vector2(500, -47)
+collision_layer = 4
+collision_mask = 3
+
+[node name="ShipTexture" type="TextureRect" parent="Ship"]
+z_index = 1
+offset_left = -1417.0
+offset_top = -2633.0
+offset_right = -905.0
+offset_bottom = -2377.0
+scale = Vector2(11.5398, 11.5398)
+texture = ExtResource("3_86edd")
 
 [node name="MastTexture" type="TextureRect" parent="Ship"]
 z_index = -1
@@ -58,15 +123,6 @@ offset_right = -809.0
 offset_bottom = -2395.0
 scale = Vector2(11.54, 11.54)
 texture = ExtResource("4_itvs0")
-
-[node name="ShipTexture" type="TextureRect" parent="Ship"]
-z_index = 1
-offset_left = -1417.0
-offset_top = -2633.0
-offset_right = -1161.0
-offset_bottom = -2377.0
-scale = Vector2(11.5398, 11.5398)
-texture = ExtResource("3_86edd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
 position = Vector2(1544, 45)
@@ -83,7 +139,7 @@ scale = Vector2(-5.28, 3.12)
 polygon = PackedVector2Array(20.644, -7.05128, 46.2121, 0.96154, 45.4545, 157.051, 8.52273, 119.872, -19.697, 67.9487, -39.0152, 4.48718, -48.8636, -41.0256, -46.4015, -68.9103, -52.8409, -71.4744, -63.2576, -71.4744, -71.7803, -80.1282, -74.053, -96.7949, -74.2424, -114.744, -73.4848, -125.321, -69.697, -130.769, -58.9015, -146.474, -51.5152, -145.833, -36.553, -141.346, -33.5227, -174.038, 10.6061, -182.051)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -3448.0
@@ -102,3 +158,13 @@ offset_right = -2480.0
 offset_bottom = -2537.0
 scale = Vector2(19.9191, 7.08914)
 texture = ExtResource("9_nb6er")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2118, -1258)
+stream = ExtResource("10_dfdx3")
+autoplay = true
+max_distance = 1e+08
+panning_strength = 0.0
+
+[node name="AdjustTimer" type="Timer" parent="."]
+wait_time = 5.0
